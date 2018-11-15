@@ -14,9 +14,10 @@ using UnityEngine;
     private float get_axis_horizontal = 0.0f;
     private bool get_key_down_space = false;
     public string pickup_tag;
-    
+    public string livebox_tag;
+    public GameManager gm;
     // Use this for initialization
-	void Start () {
+    void Start () {
         m_rb = GetComponent<Rigidbody>();
         m_collider = GetComponent<Collider>();
         collider_radius = m_collider.bounds.extents.y;
@@ -50,9 +51,25 @@ using UnityEngine;
         }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(pickup_tag))
-        other.gameObject.SetActive(false);
+        if (other.gameObject.CompareTag(pickup_tag)) {
+            other.gameObject.SetActive(false);
+            gm.score++;
+
+        }
     }
-}
+        //end scene trigger
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.CompareTag(livebox_tag))
+        {
+            gm.game_over();
+        }
+        }
+
+    
+        
+    }
+
+
 
 

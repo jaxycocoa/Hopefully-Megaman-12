@@ -16,6 +16,7 @@ using UnityEngine;
     public string pickup_tag;
     public string livebox_tag;
     public GameManager gm;
+    public string finish_tag;
     // Use this for initialization
     void Start () {
         m_rb = GetComponent<Rigidbody>();
@@ -55,6 +56,11 @@ using UnityEngine;
             other.gameObject.SetActive(false);
             gm.score++;
 
+        }
+        if (other.gameObject.CompareTag(finish_tag))
+        {
+            gm.score += 500;
+            gm.level_finished();
         }
     }
         //end scene trigger

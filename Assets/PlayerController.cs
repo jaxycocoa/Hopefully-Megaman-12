@@ -17,6 +17,7 @@ using UnityEngine;
     public string livebox_tag;
     public GameManager gm;
     public string finish_tag;
+    public string obsticle_tag;
     // Use this for initialization
     void Start () {
         m_rb = GetComponent<Rigidbody>();
@@ -52,7 +53,12 @@ using UnityEngine;
         }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(pickup_tag)) {
+        if (other.gameObject.CompareTag(obsticle_tag))
+        {
+            gm.game_over();
+            gameObject.SetActive(false);
+        }
+            if (other.gameObject.CompareTag(pickup_tag)) {
             other.gameObject.SetActive(false);
             gm.score++;
 
